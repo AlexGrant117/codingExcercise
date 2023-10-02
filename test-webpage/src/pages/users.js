@@ -4,8 +4,7 @@ import Card from 'react-bootstrap/Card';
 
 export default function Users ()  {
     const userPath = window.location.pathname;
-    const pathParts = userPath.split('/');
-    const nombre = pathParts[2];
+    const nombre = userPath.split('/')[2];
     
     const user = "https://api.github.com/users/"+ nombre;
 
