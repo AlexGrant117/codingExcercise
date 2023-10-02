@@ -8,26 +8,27 @@ export default function Users ()  {
     const nombre = pathParts[2];
     
     const user = "https://api.github.com/users/"+ nombre;
-    console.log(user);
 
     const [avatarUrl, setAvatarURL] = useState();
-    const [name, setname] =useState();
+    const [name, setName] =useState();
     const [bio, setBio] =useState();
-    useEffect (() => {
-        fetch(user)
-          .then((res) => res.json())
-          .then(
-            (result) => {
-              console.log(result);
-              setAvatarURL(result.avatar_url);
-              setname(result.name);
-              setBio(result.bio);
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
-      }, [] )
+
+    useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch(user);
+      const result = await response.json();
+
+      setAvatarURL(result.avatar_url);
+      setName(result.name);
+      setBio(result.bio);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  fetchData();
+}, []);
 
 
     return (
